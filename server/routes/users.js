@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Sample = require('../models/User');
 const User = require('../models/User');
 
-router.get('/', async (req, res) => {
+router.get('/getUsers', async (req, res) => {
   try {
-    const samples = await User.find();
-    res.json(samples);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

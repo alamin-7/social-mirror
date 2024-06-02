@@ -9,11 +9,7 @@ connectDB();
 
 app.use(express.json({ extended: false }));
 
-app.use('/routes/sample', require('./routes/sample'));
-
-app.get('/', (req, res) => {
-  res.send('API is running test');
-});
+app.use('/api/user', require('./routes/users'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
