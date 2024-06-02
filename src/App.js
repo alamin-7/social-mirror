@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
+import Users from './components/Users';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/users" element={<Users />} />
     </Routes>
   </Router>
   );
