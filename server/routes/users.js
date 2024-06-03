@@ -12,7 +12,7 @@ router.get('/getUsers', async (req, res) => {
   }
 });
 
-router.post('/add', async (req, res) => {
+router.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
   try {
