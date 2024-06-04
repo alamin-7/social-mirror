@@ -5,6 +5,7 @@ const User = require('../models/User');
 router.get('/getUsers', async (req, res) => {
   try {
     const users = await User.find();
+    console.log(`test`);
     res.json(users);
   } catch (err) {
     console.error(err.message);
@@ -34,6 +35,33 @@ router.post('/register', async (req, res) => {
     console.error(err.message);
     res.status(500).send('Server error');
   }
+});
+
+router.post('/login', async (req, res) => {
+
+  const { email, password } = req.body;
+
+  try {
+
+    let user = await User.findOne( {email} );
+
+    if(user){
+      if(user.password == password){
+        res.json("Success");
+      }
+      else{
+        res.json("Invaild password");
+      }
+    }
+    else{
+      res.json("No such user");
+    }
+
+  } catch(err) {
+    console.log(err.message);
+    res.status(500).send('server error');
+  }
+
 });
 
 module.exports = router;
