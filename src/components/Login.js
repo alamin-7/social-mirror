@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Profile from './Profile';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoggedin, setLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -13,7 +16,9 @@ function Login() {
       const response = await axios.post('http://localhost:5000/api/user/login', { email, password });
 
       if(response.data == "Success"){
-        navigate('/profile');
+        setLoggedIn(true);
+        console.log(isLoggedin);
+       // navigate('/profile');
       }
       else{
         navigate('/login');
@@ -22,6 +27,12 @@ function Login() {
       console.error('There was an error logging in!', error);
     }
   };
+
+  if(isLoggedin){
+    console.log("after loggedin");
+    console.log(email);
+    return <Profile email={email} />
+  }
 
   return (
     <div>

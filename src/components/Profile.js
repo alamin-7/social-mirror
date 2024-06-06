@@ -1,9 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import Login from './Login'
 
-export default function Profile () {
+const Profile = ({email}) => {
+
   return (
     <div>
-        <h3>Profile</h3>
+        <h3>Your profile</h3>
+        <p>Email: {email}</p>
     </div>
   )
 }
+
+export default Profile;
