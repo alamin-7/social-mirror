@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
 
-function Login() {
+function Login({onLogin}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedin, setLoggedIn] = useState(false);
@@ -17,8 +17,8 @@ function Login() {
 
       if(response.data == "Success"){
         setLoggedIn(true);
+        onLogin(email);
         console.log(isLoggedin);
-       // navigate('/profile');
       }
       else{
         navigate('/login');
