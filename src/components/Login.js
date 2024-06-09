@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
 
+const API_URL = 'http://localhost:5000/api/user';
+
 function Login({onLogin}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +15,7 @@ function Login({onLogin}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/user/login', { email, password });
+      const response = await axios.post(`${API_URL}/login`, { email, password });
 
       if(response.data == "Success"){
         setLoggedIn(true);

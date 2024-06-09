@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 import React, { useState } from 'react';
@@ -10,7 +10,6 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Users from './components/Users';
 import Navigation from './components/Navigation';
-import { Navigate } from 'react-router-dom';
 
 
 function App() {
