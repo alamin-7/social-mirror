@@ -5,8 +5,9 @@ const API_URL = 'http://localhost:5000/api/user';
 export const login = async (email, password) => {
   try {
     const response = await axios.post(`${API_URL}/login`, { email, password });
-    if (response.data.token) {
-      localStorage.setItem('token', response.data.token);
+    console.log('login response from auth service',response.data);
+    if (response.data) {
+      localStorage.setItem('token', response.data);
     }
     return response.data;
   } catch (error) {
@@ -16,6 +17,7 @@ export const login = async (email, password) => {
 
 export const getProfile = async () => {
   const token = localStorage.getItem('token');
+  console.log('getting token....',token);
   if (!token) throw new Error('No token found');
 
   try {

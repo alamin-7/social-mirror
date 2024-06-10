@@ -50,7 +50,8 @@ router.post('/login', async (req, res) => {
     if(user){
       if(user.password == password){
         const token = generateToken({email:user.email});
-        res.json(token);
+        console.log('Generated Token:', token);
+        res.json({token});
       }
       else{
         res.json("Invaild password");
@@ -69,6 +70,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/profile', (req, res) => {
   const token = req.headers['authorization'];
+  console.log('Received Token:', token);
   if (!token) {
     return res.status(401).json({ message: 'No token provided' });
   }

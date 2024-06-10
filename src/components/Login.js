@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Profile from './Profile';
+import {login} from '../services/authService';
 
 const API_URL = 'http://localhost:5000/api/user';
 
@@ -15,16 +16,9 @@ function Login({onLogin}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/login`, { email, password });
-
-      if(response.data == "Success"){
-        setLoggedIn(true);
-        onLogin(email);
-        console.log(isLoggedin);
-      }
-      else{
-        navigate('/login');
-      }
+      login(email, password);
+      onLogin();
+      navigate('/profile');
     } catch (error) {
       console.error('There was an error logging in!', error);
     }

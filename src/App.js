@@ -14,11 +14,11 @@ import Navigation from './components/Navigation';
 
 function App() {
 
+  //const [isLoggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
   const [isLoggedIn, setLoggedIn] = useState(false);
   const[email, setEmail] = useState();
 
-  const handleNavbar = (email) =>{
-    setEmail(email);
+  const handleNavbar = () =>{
     setLoggedIn(true);
   }
 
