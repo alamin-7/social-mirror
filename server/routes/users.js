@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
+const {generateToken, verifyToken} = require('../utils/jwt');
+
 router.get('/getUsers', async (req, res) => {
   try {
     const users = await User.find();
@@ -47,7 +49,8 @@ router.post('/login', async (req, res) => {
 
     if(user){
       if(user.password == password){
-        res.json("Success");
+        const token = generateToken({email:user.email});
+        res.json(token);
       }
       else{
         res.json("Invaild password");
@@ -62,6 +65,20 @@ router.post('/login', async (req, res) => {
     res.status(500).send('server error');
   }
 
+});
+
+router.get('/profile', (req, res) => {
+  const token = req.headers['authorization'];
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  const decoded = verifyToken(token);
+  if (decoded) {
+    res.json({ message: 'Profile data', user: decoded });
+  } else {
+    res.status(401).json({ message: 'Invalid token' });
+  }
 });
 
 module.exports = router;
