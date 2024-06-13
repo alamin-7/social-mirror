@@ -1,19 +1,23 @@
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5000/api/user';
+
 
 export const login = async (email, password) => {
   try {
     const response = await axios.post(`${API_URL}/login`, { email, password });
     console.log('login response from auth service',response.data);
-    if (response.data) {
-      localStorage.setItem('token', response.data);
+    if (response.data.token) {
+      console.log('setting token-------',response.data.token);
+      localStorage.setItem('token', response.data.token);
     }
     return response.data;
   } catch (error) {
     throw error;
   }
 };
+
 
 export const getProfile = async () => {
   const token = localStorage.getItem('token');
@@ -30,8 +34,4 @@ export const getProfile = async () => {
   } catch (error) {
     throw error;
   }
-};
-
-export const logout = () => {
-  localStorage.removeItem('token');
 };

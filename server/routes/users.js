@@ -69,6 +69,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/profile', (req, res) => {
+  console.log("in backend /profile")
   const token = req.headers['authorization'];
   console.log('Received Token:', token);
   if (!token) {

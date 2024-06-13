@@ -5,10 +5,20 @@ import Login from './Login'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getProfile } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../services/authService';
 
 const Profile = ({email}) => {
 
   const [profileData, setProfileData] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handeLogout = () => {
+    console.log("in handle logout");
+    localStorage.removeItem('token');
+    navigate('/login');
+  }
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -32,7 +42,11 @@ const Profile = ({email}) => {
   if (!profileData) return <p>Loading...</p>;
 
   return (
+    <div>
     <p>Signed as: {profileData.user.email}</p>
+    <button onClick={handeLogout}>Logout</button>
+    </div>
+    
   )
 }
 
