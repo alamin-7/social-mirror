@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore build and config files (if not needed in the image)
+/webpack.config.js
+/.babelrc
+/.eslintrc.js
+
+# more
+*.swp
+*.bak
+*.tmp
+*.log
+*.log.*
+
